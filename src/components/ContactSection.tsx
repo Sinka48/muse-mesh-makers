@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Game from "./Game";
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -47,6 +48,9 @@ const ContactSection = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Endless Runner Game */}
+        <Game />
       </div>
 
       {/* Footer */}
