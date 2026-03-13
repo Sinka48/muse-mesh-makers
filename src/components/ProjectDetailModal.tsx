@@ -52,6 +52,7 @@ const defaultDetails: Record<string, { challenge: string; approach: string; outc
 };
 
 const ProjectDetailModal = ({ project, onClose }: ProjectDetailModalProps) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
