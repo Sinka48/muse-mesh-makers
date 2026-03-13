@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import ProjectDetailModal, { type ProjectData } from "./ProjectDetailModal";
 
 const projects = [
   {
