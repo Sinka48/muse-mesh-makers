@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, ChevronRight } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export interface ProjectData {
   num: string;
@@ -10,6 +10,7 @@ export interface ProjectData {
   desc: string;
   highlights: string[];
   tech: string;
+  images?: string[];
   details?: {
     challenge: string;
     approach: string;
@@ -51,6 +52,7 @@ const defaultDetails: Record<string, { challenge: string; approach: string; outc
 };
 
 const ProjectDetailModal = ({ project, onClose }: ProjectDetailModalProps) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
@@ -142,7 +144,63 @@ const ProjectDetailModal = ({ project, onClose }: ProjectDetailModalProps) => {
                 <p className="font-mono text-base md:text-lg text-secondary-foreground leading-relaxed">
                   {project.desc}
                 </p>
-              </motion.div>
+               </motion.div>
+
+              {/* Project Images Gallery */}
+              {project.images && project.images.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                  className="mb-20 pb-20 border-b border-border"
+                >
+                  <span className="font-mono text-[11px] text-primary uppercase tracking-widest mb-8 block">
+                    Project Gallery
+                  </span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {project.images.map((img, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                        className="relative overflow-hidden border border-border group cursor-pointer aspect-video"
+                        onClick={() => setSelectedImage(img)}
+                      >
+                        <img
+                          src={img}
+                          alt={`${project.title} screenshot ${i + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-300" />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Lightbox */}
+              <AnimatePresence>
+                {selectedImage && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[200] bg-background/95 backdrop-blur-lg flex items-center justify-center p-6 cursor-pointer"
+                    onClick={() => setSelectedImage(null)}
+                  >
+                    <motion.img
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.9, opacity: 0 }}
+                      src={selectedImage}
+                      alt="Project detail"
+                      className="max-w-full max-h-[85vh] object-contain border border-border"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Challenge / Approach / Outcome */}
               {details && (
