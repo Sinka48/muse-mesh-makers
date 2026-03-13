@@ -102,21 +102,27 @@ const ProjectCard = ({ project, index, onClick }: { project: typeof projects[0];
 };
 
 const ProjectsSection = () => {
-  return (
-    <section id="work" className="py-24 md:py-40 px-6 md:px-12 border-t border-border">
-      <div className="max-w-6xl mx-auto">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest">// Selected Work</span>
-        <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter mt-4">
-          Projects
-        </h2>
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
-        <div className="mt-16">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.num} project={project} index={i} />
-          ))}
+  return (
+    <>
+      <section id="work" className="py-24 md:py-40 px-6 md:px-12 border-t border-border">
+        <div className="max-w-6xl mx-auto">
+          <span className="font-mono text-xs text-primary uppercase tracking-widest">// Selected Work</span>
+          <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter mt-4">
+            Projects
+          </h2>
+
+          <div className="mt-16">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.num} project={project} index={i} onClick={() => setSelectedProject(project)} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+    </>
   );
 };
 
