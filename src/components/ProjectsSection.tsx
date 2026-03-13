@@ -1,6 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import projectFintech from "@/assets/project-fintech.jpg";
+import projectAiMusic from "@/assets/project-ai-music.jpg";
+import projectNft from "@/assets/project-nft.jpg";
 
 const projects = [
   {
@@ -11,6 +14,7 @@ const projects = [
     desc: "Designed a crypto trading platform focused on speed, clarity, and mobile-first experience.",
     highlights: ["Redesigned dashboard experience", "Created modular UI system", "Improved onboarding flow"],
     tech: "Figma, React, Tailwind",
+    image: projectFintech,
   },
   {
     num: "02",
@@ -20,6 +24,7 @@ const projects = [
     desc: "An AI-powered music generation tool for producers and artists.",
     highlights: ["Designed generative workflow", "Built interactive audio UI", "Created visual identity"],
     tech: "Figma, Web Audio API, AI tools",
+    image: projectAiMusic,
   },
   {
     num: "03",
@@ -29,6 +34,7 @@ const projects = [
     desc: "Designed an NFT marketplace focusing on collectors and digital artists.",
     highlights: ["Marketplace UX", "Wallet integration flow", "Auction mechanics"],
     tech: "Figma, Web3 integrations",
+    image: projectNft,
   },
 ];
 
@@ -45,55 +51,61 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       transition={{ duration: 0.7, delay: index * 0.15 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group border-t border-border py-12 md:py-16 cursor-pointer"
+      className="group cursor-pointer"
     >
-      <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-12 items-start">
-        {/* Number */}
-        <span className="font-display text-6xl md:text-8xl font-bold text-secondary leading-none group-hover:text-primary transition-colors duration-500">
-          {project.num}
-        </span>
+      {/* Thumbnail */}
+      <div className="relative overflow-hidden border border-border bg-card aspect-[16/10] mb-6">
+        <motion.img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover"
+          animate={{ scale: hovered ? 1.05 : 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        />
+        <div className="absolute inset-0 bg-background/60 group-hover:bg-background/30 transition-all duration-500" />
+        <div className="absolute top-4 left-4 md:top-6 md:left-6">
+          <span className="font-display text-5xl md:text-7xl font-bold text-primary/20 group-hover:text-primary/40 transition-colors duration-500 leading-none">
+            {project.num}
+          </span>
+        </div>
+        <motion.div
+          className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 border border-border bg-background/80 flex items-center justify-center"
+          animate={{ rotate: hovered ? 45 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+        </motion.div>
+      </div>
 
-        {/* Content */}
-        <div className="space-y-4">
-          <div className="flex items-baseline gap-4 flex-wrap">
-            <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight group-hover:text-primary transition-colors duration-300">
-              {project.title}
-            </h3>
-            <motion.span animate={{ rotate: hovered ? 45 : 0 }} transition={{ duration: 0.3 }}>
-              <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </motion.span>
-          </div>
-
-          <div className="flex items-center gap-4 font-mono text-xs text-muted-foreground">
+      {/* Info */}
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+        <div className="space-y-2 flex-1">
+          <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight group-hover:text-primary transition-colors duration-300">
+            {project.title}
+          </h3>
+          <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
             <span>{project.role}</span>
             <span className="w-1 h-1 rounded-full bg-muted-foreground" />
             <span>{project.year}</span>
           </div>
-
-          <p className="font-mono text-sm text-muted-foreground max-w-lg">{project.desc}</p>
-
-          <div className="flex flex-wrap gap-2 pt-2">
-            {project.highlights.map((h) => (
-              <span key={h} className="font-mono text-[11px] px-2.5 py-1 border border-border text-muted-foreground">
-                {h}
-              </span>
-            ))}
-          </div>
+          <p className="font-mono text-xs text-muted-foreground max-w-md leading-relaxed">{project.desc}</p>
         </div>
 
-        {/* Tech */}
-        <div className="hidden md:block">
-          <span className="font-mono text-[11px] text-muted-foreground uppercase tracking-widest">Tech</span>
-          <p className="font-mono text-xs text-foreground mt-1 max-w-[150px]">{project.tech}</p>
+        <div className="flex flex-wrap gap-1.5 md:max-w-[200px] md:justify-end">
+          {project.highlights.map((h) => (
+            <span key={h} className="font-mono text-[10px] px-2 py-1 border border-border text-muted-foreground">
+              {h}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Hover line */}
+      {/* Bottom line */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: hovered ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="h-[1px] bg-primary mt-12 origin-left"
+        className="h-[1px] bg-primary mt-8 origin-left"
       />
     </motion.article>
   );
@@ -108,7 +120,7 @@ const ProjectsSection = () => {
           Projects
         </h2>
 
-        <div className="mt-16">
+        <div className="mt-16 grid gap-16 md:gap-20">
           {projects.map((project, i) => (
             <ProjectCard key={project.num} project={project} index={i} />
           ))}
