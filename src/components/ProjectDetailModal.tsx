@@ -10,6 +10,7 @@ export interface ProjectData {
   desc: string;
   highlights: string[];
   tech: string;
+  images?: string[];
   details?: {
     challenge: string;
     approach: string;
