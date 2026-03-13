@@ -129,10 +129,7 @@ const Game = ({ configMarkdown }: GameProps) => {
 
         {/* Game over overlay */}
         {gameState === 'gameover' && (
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ backgroundColor: `${cfg.bgColor}80`, backdropFilter: 'blur(4px)' }}
-          >
+          <div className="absolute inset-0 flex items-center justify-center">
             <button
               onClick={handleRestart}
               className="font-mono text-sm uppercase tracking-widest px-8 py-3 bg-transparent border transition-all duration-200"
