@@ -417,9 +417,7 @@ export class GameEngine {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.w, this.h);
 
-    // BG
-    ctx.fillStyle = this.cfg.bgColor;
-    ctx.fillRect(0, 0, this.w, this.h);
+    // BG — transparent, no fill
 
     // Skyline
     ctx.fillStyle = this.cfg.skylineColor;
