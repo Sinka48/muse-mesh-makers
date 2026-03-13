@@ -48,6 +48,9 @@ const ContactSection = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Endless Runner Game */}
+        <Game />
       </div>
 
       {/* Footer */}
