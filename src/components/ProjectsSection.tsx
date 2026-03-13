@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import ProjectDetailModal, { type ProjectData } from "./ProjectDetailModal";
 
 const projects = [
   {
@@ -32,7 +33,7 @@ const projects = [
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+const ProjectCard = ({ project, index, onClick }: { project: typeof projects[0]; index: number; onClick: () => void }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
   const [hovered, setHovered] = useState(false);
@@ -45,6 +46,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       transition={{ duration: 0.7, delay: index * 0.15 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
       className="group border-t border-border py-12 md:py-16 cursor-pointer"
     >
       <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-12 items-start">
@@ -100,21 +102,27 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 };
 
 const ProjectsSection = () => {
-  return (
-    <section id="work" className="py-24 md:py-40 px-6 md:px-12 border-t border-border">
-      <div className="max-w-6xl mx-auto">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest">// Selected Work</span>
-        <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter mt-4">
-          Projects
-        </h2>
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
-        <div className="mt-16">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.num} project={project} index={i} />
-          ))}
+  return (
+    <>
+      <section id="work" className="py-24 md:py-40 px-6 md:px-12 border-t border-border">
+        <div className="max-w-6xl mx-auto">
+          <span className="font-mono text-xs text-primary uppercase tracking-widest">// Selected Work</span>
+          <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tighter mt-4">
+            Projects
+          </h2>
+
+          <div className="mt-16">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.num} project={project} index={i} onClick={() => setSelectedProject(project)} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+    </>
   );
 };
 
