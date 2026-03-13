@@ -46,6 +46,7 @@ const ProjectCard = ({ project, index, onClick }: { project: typeof projects[0];
       transition={{ duration: 0.7, delay: index * 0.15 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
       className="group border-t border-border py-12 md:py-16 cursor-pointer"
     >
       <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-12 items-start">
