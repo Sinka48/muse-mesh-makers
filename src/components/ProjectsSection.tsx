@@ -12,11 +12,6 @@ const projects = [
     desc: "Designed a crypto trading platform focused on speed, clarity, and mobile-first experience.",
     highlights: ["Redesigned dashboard experience", "Created modular UI system", "Improved onboarding flow"],
     tech: "Figma, React, Tailwind",
-    images: [
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
-      "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    ],
   },
   {
     num: "02",
@@ -26,11 +21,6 @@ const projects = [
     desc: "An AI-powered music generation tool for producers and artists.",
     highlights: ["Designed generative workflow", "Built interactive audio UI", "Created visual identity"],
     tech: "Figma, Web Audio API, AI tools",
-    images: [
-      "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80",
-      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
-      "https://images.unsplash.com/photo-1571974599782-87624638275e?w=800&q=80",
-    ],
   },
   {
     num: "03",
@@ -40,11 +30,6 @@ const projects = [
     desc: "Designed an NFT marketplace focusing on collectors and digital artists.",
     highlights: ["Marketplace UX", "Wallet integration flow", "Auction mechanics"],
     tech: "Figma, Web3 integrations",
-    images: [
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
-      "https://images.unsplash.com/photo-1643101809204-6fb869816dbe?w=800&q=80",
-      "https://images.unsplash.com/photo-1644361566696-3d442b5b482a?w=800&q=80",
-    ],
   },
 ];
 

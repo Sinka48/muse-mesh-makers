@@ -3,34 +3,8 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-end pb-12 md:pb-20 px-6 md:px-12 overflow-hidden">
-      {/* Animated background blobs */}
-      <motion.div
-        animate={{
-          x: [0, 80, -40, 60, 0],
-          y: [0, -60, 40, -20, 0],
-          scale: [1, 1.3, 0.9, 1.15, 1],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/8 blur-[120px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, -60, 30, -80, 0],
-          y: [0, 50, -30, 60, 0],
-          scale: [1, 0.85, 1.2, 0.95, 1],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/3 left-[-5%] w-[400px] h-[400px] rounded-full bg-primary/5 blur-[100px]"
-      />
-      <motion.div
-        animate={{
-          x: [0, 40, -60, 0],
-          y: [0, -80, 20, 0],
-          scale: [0.8, 1.1, 0.9, 0.8],
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[10%] left-[30%] w-[300px] h-[300px] rounded-full bg-primary/4 blur-[80px]"
-      />
+      {/* Background accent circle */}
+      <div className="absolute top-1/4 right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]" />
 
       <div className="relative z-10">
         {/* Status line */}
